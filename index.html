@@ -1,0 +1,402 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BAULOG</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Barlow:wght@400;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+:root{--bg:#E9ECEF;--card:#fff;--ink:#1D2733;--mute:#5B6B7B;--line:#C5CCD3;--hi:#F5C400;--hiink:#1D2733;--bad:#B3261E;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141A21;--card:#1D2631;--ink:#E8ECF0;--mute:#9AA8B6;--line:#34414F;--bad:#FF8A80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141A21;--card:#1D2631;--ink:#E8ECF0;--mute:#9AA8B6;--line:#34414F;--bad:#FF8A80;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+.top{background:#0B1F3A;color:#fff;padding:12px 16px}
+.top h1{margin:0;font:900 32px/1.1 Inter,"Arial Black",Impact,system-ui,sans-serif;letter-spacing:0;text-transform:uppercase;max-width:640px;margin:0 auto}
+main{max-width:640px;margin:0 auto;padding:16px}
+h2{font:700 24px/1.2 "Barlow Condensed","Arial Narrow",sans-serif;margin:20px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;margin:0 0 12px}
+.row{cursor:pointer}
+.row b{font-size:18px}
+.mute{color:var(--mute);font-size:14px}
+label{display:block;font-size:14px;color:var(--mute);margin:10px 0 4px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:6px;padding:10px;min-height:44px}
+textarea{min-height:80px;resize:vertical}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--hi);outline-offset:1px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{font:600 16px Barlow,system-ui,sans-serif;min-height:44px;padding:0 16px;border-radius:6px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+button.p{background:var(--hi);border-color:var(--hi);color:var(--hiink)}
+button.d{border-color:var(--bad);color:var(--bad)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.ph{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ph img{width:92px;height:92px;object-fit:cover;border-radius:4px;border:1px solid var(--line);background:var(--line)}
+.rep .ph img{width:48%;height:auto;aspect-ratio:4/3}
+.ln{display:flex;gap:8px;justify-content:space-between;align-items:flex-start;border-top:1px solid var(--line);padding:8px 0;margin-top:8px}.ln.rg{border-left:5px solid var(--hi);padding-left:8px}.tag{font-size:12px;font-weight:600;background:var(--line);border-radius:4px;padding:1px 6px}.rg .tag{background:var(--hi);color:var(--hiink)}.chk{display:flex;gap:8px;align-items:center;color:var(--ink);font-size:16px}.chk input{width:24px;min-height:24px}select{width:100%;font:inherit;padding:10px;min-height:44px;background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:6px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.chips button{min-width:44px;padding:0 10px}
+.navb{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;gap:8px;padding:8px 16px;max-width:640px;margin:0 auto}.navb button{flex:1}.navb button:disabled{opacity:.35}
+.day{border:3px solid var(--ink);border-radius:10px;background:var(--card);padding:0 14px 14px;margin:12px 0}.dayh{background:var(--ink);color:var(--bg);margin:0 -14px 12px;padding:8px 14px;border-radius:6px 6px 0 0;font:700 20px "Barlow Condensed","Arial Narrow",sans-serif;letter-spacing:.04em}
+.daysel{display:flex;gap:8px;align-items:center}.daysel input{flex:1}.daysel button{min-width:48px;font-size:22px}
+.mk{flex:1;min-height:52px;font-size:18px}.big{min-height:60px;font-size:20px}.gr{border-color:#1E8E3E;color:#1E8E3E}.gr.on{background:#1E8E3E;color:#fff}.rd{border-color:#C62828;color:#C62828}.rd.on{background:#C62828;color:#fff}.dh3{font:700 20px "Barlow Condensed",sans-serif;margin:16px 0 6px}
+details.card summary{cursor:pointer;min-height:32px}
+.tag.last{background:var(--hi);color:var(--hiink)}
+.toast{position:fixed;left:12px;right:12px;bottom:16px;z-index:30;background:var(--ink);color:var(--bg);padding:12px 14px;border-radius:8px;font-size:16px;display:none}
+.hb{display:inline-block;min-width:54px;text-align:center;background:var(--ink);color:var(--bg);border-radius:6px;padding:0 8px;font-weight:700;margin-right:6px}details.pn{border:1.5px dashed var(--line);border-radius:8px;padding:8px 10px;margin:10px 0}
+.rgh{font-weight:700;color:#C62828;margin-top:6px}.rep .rgh{color:inherit;text-decoration:underline}
+.mute2{color:var(--mute);font-size:14px}.hero{background:#0B1F3A;color:#fff;border-radius:14px;padding:18px 18px 16px;margin:0 0 12px;position:relative;overflow:hidden}.hero{border-bottom:5px solid #FFC400}
+.hero .lb{font-size:14px;opacity:.8;text-transform:uppercase;letter-spacing:.08em}.hero .big{font:700 44px/1.05 "Barlow Condensed","Arial Narrow",sans-serif;color:#FFC400;margin:4px 0 2px}.hero .sm{font-size:16px;opacity:.9}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stats div{background:rgba(255,255,255,.08);border-radius:8px;padding:8px}.stats b{display:block;font:700 22px "Barlow Condensed",sans-serif;color:#fff}.stats span{font-size:12px;opacity:.75}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px;margin:0 0 12px}.seg button{min-height:40px;padding:0 4px;border:0;font-size:14px}.seg button.p{background:#0B1F3A;color:#fff}
+.oc{background:var(--card);border:1px solid var(--line);border-left:6px solid #FFC400;border-radius:10px;padding:14px;margin:0 0 12px;cursor:pointer}.oc .nm{font:700 24px/1.1 "Barlow Condensed",sans-serif}.oc .mn{font:700 20px "Barlow Condensed",sans-serif;margin-top:4px}
+.more{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 12px}.more summary{cursor:pointer;font-weight:600;min-height:32px}
+.tot{font:700 22px "Barlow Condensed","Arial Narrow",sans-serif}
+.rep .mute{display:none}.rep ul{margin:4px 0 8px;padding-left:20px}
+@media print{.top,.noprint{display:none!important}body{background:#fff;color:#000}.card{border-color:#999;break-inside:avoid}main{max-width:none;padding:0}}
+</style>
+</head>
+<body>
+<div class="top"><h1><svg width="36" height="36" viewBox="0 0 100 100" style="vertical-align:middle;margin-right:10px"><rect width="100" height="100" rx="22" fill="#FFC400"/><rect x="14" y="14" width="20" height="20" rx="5" fill="#0B1F3A"/><rect x="38" y="14" width="20" height="20" rx="5" fill="#0B1F3A"/><rect x="62" y="14" width="20" height="20" rx="5" fill="#0B1F3A"/><rect x="14" y="38" width="20" height="20" rx="5" fill="#0B1F3A"/><rect x="38" y="38" width="20" height="20" rx="5" fill="#fff"/><rect x="62" y="38" width="20" height="20" rx="5" fill="#0B1F3A"/><rect x="14" y="62" width="20" height="20" rx="5" fill="#0B1F3A"/><rect x="38" y="62" width="20" height="20" rx="5" fill="#0B1F3A"/><rect x="62" y="62" width="20" height="20" rx="5" fill="#0B1F3A"/><path d="M42.5 50.5l5.5 5.5 10-11.5" stroke="#16A34A" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="display:inline-block;vertical-align:middle">BAULOG<i style="display:block;height:5px;border-radius:3px;background:#FFC400;margin-top:3px"></i></span></h1></div>
+<div class="navb noprint" id="nav"></div>
+<main id="app"></main>
+<script>
+window.claude=window.claude||{use:async()=>null};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const uid=()=>Math.random().toString(36).slice(2,10);
+let db={obras:[]},v={n:"list"},pend=[],idb=null;
+try{db=JSON.parse(localStorage.getItem("regie")||'{"obras":[]}')}catch(e){}
+function save(){try{localStorage.setItem("regie",JSON.stringify(db))}catch(e){alert("No se pudo guardar en este navegador.")}}
+const openDb=()=>new Promise(r=>{try{const q=indexedDB.open("regie-fotos",1);q.onupgradeneeded=()=>q.result.createObjectStore("f");q.onsuccess=()=>{idb=q.result;r()};q.onerror=()=>r()}catch(e){r()}});
+const put=(k,x)=>new Promise(r=>{if(!idb)return r();const t=idb.transaction("f","readwrite");t.objectStore("f").put(x,k);t.oncomplete=r;t.onerror=r});
+const get=k=>new Promise(r=>{if(!idb)return r();const q=idb.transaction("f").objectStore("f").get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r()});
+const del=k=>new Promise(r=>{if(!idb)return r();const t=idb.transaction("f","readwrite");t.objectStore("f").delete(k);t.oncomplete=r;t.onerror=r});
+const shrink=f=>new Promise(r=>{const i=new Image();i.onload=()=>{const s=Math.min(1,1000/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*s;c.height=i.height*s;c.getContext("2d").drawImage(i,0,0,c.width,c.height);r(c.toDataURL("image/jpeg",.65))};i.src=URL.createObjectURL(f)});
+const fdate=d=>d?new Date(d+"T12:00").toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"}):"";
+db.clientes=db.clientes||[];
+const allCl=()=>[...new Set([...db.clientes,...db.obras.map(o=>o.cliente).filter(Boolean)])].sort();
+const clOpts=sel=>`<option value="">Sin cliente</option>`+allCl().map(c=>`<option value="${esc(c)}"${c===sel?" selected":""}>${esc(c)}</option>`).join("");
+const sumH=f=>o=>(o.lineas||[]).filter(f).reduce((a,x)=>a+(parseFloat(x.h)||0),0);
+const hrAll=sumH(x=>!x.otro),hrR=sumH(x=>x.regie&&!x.otro),hrO=sumH(x=>x.otro);
+const rN=o=>o.tn===undefined||o.tn===""?55:(parseFloat(o.tn)||0),rC=o=>rN(o)*1.081,fr=n=>(Math.round(n*100)/100).toFixed(2);
+const hrN=o=>hrAll(o)-hrR(o);
+const money=o=>hrAll(o)*rN(o),moneyC=o=>hrAll(o)*rC(o);
+const fm=n=>"CHF "+n.toLocaleString("de-CH",{minimumFractionDigits:2,maximumFractionDigits:2});
+const mnyH=o=>`${fh(hrAll(o))} h (regie ya incluida: ${fh(hrR(o))} h)<br>Sin IVA: × ${rN(o)} = <b>${fm(money(o))}</b><br>Con IVA: × ${fr(rC(o))} = <b>${fm(moneyC(o))}</b>`;
+const L=o=>o.lineas||[];
+const hr=(o,g)=>L(o).filter(x=>!!x.regie===g).reduce((a,x)=>a+(parseFloat(x.h)||0),0);
+const fh=n=>String(Math.round(n*100)/100).replace(".",",");
+const fd=d=>d?d.split("-").reverse().join("."):"";
+const SEED=[];
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+const addDays=(s,n)=>{const d=new Date(s+"T12:00");d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const lastAct=o=>[...(o.lineas||[]).map(x=>x.fecha),...(o.material||[]).map(m=>m.fecha)].filter(Boolean).sort().pop()||"";
+let dlang="es-ES",lastDate=today(),busy=false;
+const LANGS=[["es-ES","Español"],["pt-PT","Português"],["it-IT","Italiano"],["ro-RO","Română"],["sq-AL","Shqip"],["sr-RS","Srpski"],["hr-HR","Hrvatski"],["tr-TR","Türkçe"],["pl-PL","Polski"],["fr-FR","Français"],["en-GB","English"],["de-CH","Deutsch"]];
+const cur=()=>db.obras.find(o=>o.id===v.id);
+db.obras.forEach(o=>{o.lineas=o.lineas||[];(o.dias||[]).forEach(d=>o.lineas.push({id:uid(),fecha:d.fecha,txt:d.desc||"",orig:"",lang:"de-CH",h:d.horas,regie:false,fotos:[]}));o.dias=[];(o.regies||[]).forEach(r=>o.lineas.push({id:uid(),fecha:r.fecha,txt:r.desc,orig:"",lang:"de-CH",h:r.horas,regie:true,fotos:r.fotos||[]}));o.regies=[]});
+function mergeObra(so){
+  let o=db.obras.find(x=>x.nombre===so.nombre);
+  if(o&&!o.cliente&&so.cliente)o.cliente=so.cliente;
+  if(o){if(o.tn===undefined&&so.tn!==undefined)o.tn=so.tn;if(o.tc===undefined&&so.tc!==undefined)o.tc=so.tc}
+  if(!o){o={id:uid(),nombre:so.nombre,cliente:so.cliente||"",direccion:so.direccion||"",lineas:[],material:[],tn:so.tn,tc:so.tc};db.obras.push(o)}
+  if(so.reset)o.lineas=o.lineas.filter(x=>x.orig||(x.fotos&&x.fotos.length));
+  (so.lineas||[]).forEach(l=>{if(!o.lineas.some(x=>x.fecha===l.fecha&&x.txt===l.txt&&x.regie===!!l.regie))o.lineas.push({id:uid(),fecha:l.fecha,txt:l.txt,orig:"",lang:"de-CH",h:l.h||0,regie:!!l.regie,otro:!!l.otro,mat:"",fotos:[]})});
+  (so.material||[]).forEach(m=>{if(!o.material.some(x=>x.n===m.n&&x.c===m.c))o.material.push({id:uid(),n:m.n,c:m.c||""})});
+}
+function byDate(arr){const m={};arr.forEach(x=>(m[x.fecha]=m[x.fecha]||[]).push(x));return Object.keys(m).sort().map(k=>[k,m[k]])}
+function rowH(o){return `<div class="card row" data-a="open" data-id="${o.id}"><b>${esc(o.nombre)}</b>${o.cliente?` <span class="mute">· ${esc(o.cliente)}</span>`:""}<div class="mute">${lastAct(o)?"Último día "+fd(lastAct(o))+" · ":""}${fh(hrAll(o))} h (de ellas regie ${fh(hrR(o))} h) · ${fm(money(o))} sin IVA</div></div>`}
+function listV(){
+  const tab=v.tab||"abiertas";
+  const ab=db.obras.filter(o=>!o.cerrada),ce=db.obras.filter(o=>o.cerrada);
+  const tabs=[["abiertas","Obras"],["reportes","Reportes"],["regies","Regies"],["cerradas","Cerradas"]].map(t=>`<button data-a="tab" data-t="${t[0]}"${tab===t[0]?' class="p"':''}>${t[1]}</button>`).join("");
+  const sumS=db.obras.reduce((a,o)=>a+money(o),0),sumC=db.obras.reduce((a,o)=>a+moneyC(o),0);
+  let body="";
+  if(tab==="abiertas"){
+    const so=ab.slice().sort((x,y)=>lastAct(y).localeCompare(lastAct(x)));
+    body=(so.map((o,i)=>`<div class="oc" data-a="open" data-id="${o.id}">${i===0?'<span class="tag last">ÚLTIMO TRABAJO</span>':''}<div class="nm">${esc(o.nombre)}</div><div class="mute">${esc(o.cliente||"Sin cliente")}${lastAct(o)?" · último día "+fd(lastAct(o)):""}</div><div class="mute">${fh(hrAll(o))} h (de ellas regie ${fh(hrR(o))} h)</div><div class="mn">${fm(money(o))} <span class="mute">sin IVA · ${fm(moneyC(o))} con IVA</span></div><div class="bar"><button class="mk gr on" data-a="open" data-id="${o.id}">Abrir el reporte de hoy</button></div></div>`).join("")||'<p class="mute">No hay obras abiertas. Crea una abajo.</p>')+`
+  <details class="more"${db.obras.length?"":" open"}><summary>＋ Nuevo trabajo o cliente</summary>
+  <h2>Nuevo trabajo</h2><div class="card">
+  <label for="on">Trabajo (Auftrag, p. ej. calle y número)</label><input id="on">
+  <label for="oc">Cliente</label><select id="oc">${clOpts("")}</select>
+  <label for="od">Dirección</label><input id="od">
+  <div class="bar"><button class="p" data-a="addo">Crear trabajo</button></div></div>
+  <h2>Nuevo cliente</h2><div class="card"><label for="nc">Nombre del cliente (jefe o empresa)</label><input id="nc"><div class="bar"><button class="p" data-a="addc">Añadir cliente</button></div></div>
+  </details><details class="more"><summary>Mi nombre (sale en el informe)</summary><label for="me">Nombre</label><input id="me" value="${esc(ME())}"></details><details class="more"><summary>Importar notas</summary><div class="card">
+  <label for="it">O pega aquí tus notas tal cual (se ordenan solas y salen en alemán)</label><textarea id="it" style="min-height:120px"></textarea>
+  <div class="bar"><button class="p" data-a="imp">Ordenar e importar</button></div></div></details>`;
+  }else if(tab==="reportes"){
+    body='<h2>Reportes por fecha</h2><p class="mute">Toca un día para abrirlo, o "Informe" para el PDF de la obra.</p>'+(db.obras.length>1?`<div class="card" style="border:2px solid var(--hi)"><b>Informe conjunto</b><div class="mute">Marca las obras que quieres juntar en un solo informe.</div>${db.obras.map(o=>`<label class="chk"><input type="checkbox" class="mx" value="${o.id}"> ${esc(o.nombre)}${o.cliente?` <span class="mute">· ${esc(o.cliente)}</span>`:""}</label>`).join("")}<div class="bar"><button class="p" data-a="multi">Ver informe conjunto</button></div></div>`:"")+(db.obras.slice().sort((x,y)=>lastAct(y).localeCompare(lastAct(x))).map(o=>`<div class="card"><b>${esc(o.nombre)}</b>${o.cerrada?' <span class="tag">cerrada</span>':''}<div class="mute">${o.cliente?esc(o.cliente)+" · ":""}${fh(hrAll(o))} h, regie ${fh(hrR(o))} h</div><div class="bar"><button class="p" data-a="openrep" data-id="${o.id}">Informe</button></div>${byDate(o.lineas).reverse().map(([d,xs])=>{const hh=xs.filter(x=>!x.otro).reduce((a,x)=>a+(parseFloat(x.h)||0),0),rr=xs.filter(x=>x.regie&&!x.otro).reduce((a,x)=>a+(parseFloat(x.h)||0),0);return `<div class="ln${rr?" rg":""}" data-a="opend" data-id="${o.id}" data-d="${d}" style="cursor:pointer"><div><b>${fd(d)}</b> · ${fh(hh)} h${rr?` · REGIE ${fh(rr)} h`:""}</div></div>`}).join("")}</div>`).join("")||'<p class="mute">Aún no hay obras.</p>');
+  }else if(tab==="regies"){
+    const js=db.obras.filter(o=>o.lineas.some(x=>x.regie));
+    body='<h2>Regies</h2><p class="mute">Trabajos fuera de oferta que el cliente factura aparte.</p>'+(js.map(o=>`<div class="card row" data-a="openrep" data-id="${o.id}"><b>${esc(o.nombre)}</b> <span class="mute">· ${esc(o.cliente||"Sin cliente")}</span><div class="tot">${fh(hrR(o))} h${hrO(o)?` + otras personas ${fh(hrO(o))} h`:""}</div>${byDate(o.lineas.filter(x=>x.regie)).map(([d,xs])=>`<div class="mute">${fd(d)}: ${xs.map(x=>esc(x.txt.replace(/^Regie:\s*/,""))+" ("+fh(parseFloat(x.h)||0)+" h)").join("; ")}</div>`).join("")}</div>`).join("")||'<p class="mute">Aún no hay regies.</p>');
+  }else{
+    body='<h2>Obras cerradas</h2>'+(ce.map(rowH).join("")||'<p class="mute">Ninguna cerrada todavía.</p>');
+  }
+  const H=db.obras.reduce((s,o)=>s+hrAll(o),0),RG=db.obras.reduce((s,o)=>s+hrR(o),0);
+  return `<div class="hero"><div class="lb">Lo que se te debe</div><div class="big">${fm(sumS)}</div><div class="sm">sin IVA · <b>${fm(sumC)}</b> con IVA</div>
+  <div class="stats"><div><b>${f1(H)}</b><span>horas</span></div><div><b>${f1(RG)}</b><span>de regie</span></div><div><b>${ab.length}</b><span>obras abiertas</span></div></div></div>
+  <div class="seg">${tabs}</div>${body}`;
+}
+function lineH(x){
+  const ph=(x.fotos||[]).map(f=>`<img data-f="${f}" alt="Foto"${v.edit===x.id?` data-dl="${f}" data-id="${x.id}"`:""}>`).join("");
+  if(v.edit===x.id)return `<div class="ln${x.regie?" rg":""}" style="flex-direction:column;border:2px solid var(--ink);border-radius:8px;padding:10px"><b>Editar tarea</b>
+   <label for="et">Texto (en alemán, puedes cambiarlo o añadir más)</label><textarea id="et">${esc(x.txt)}</textarea>
+   <div class="bar"><button data-a="mic" data-t="et">Dictar</button><button data-a="etr">Traducir al alemán</button></div>
+   <label for="eh">Horas</label><input id="eh" type="number" step="0.25" min="0" inputmode="decimal" value="${parseFloat(x.h)||""}">
+   <div class="chips">${[1,2,3,4,5,6,7,8].map(n=>`<button data-a="ehset" data-v="${n}">${n}</button>`).join("")}<button data-a="ehadd" data-v="-0.5">−½</button><button data-a="ehadd" data-v="0.5">+½</button></div>
+   <label class="chk"><input id="er" type="checkbox"${x.regie?" checked":""}> REGIE</label>
+   <label class="chk"><input id="eo" type="checkbox"${x.otro?" checked":""}> Lo hizo otra persona (no cuenta en mis horas)</label>
+   <div class="ph">${ph}</div><p class="mute" style="margin:4px 0 0">${(x.fotos||[]).length?"Toca una foto para borrarla.":""}</p>
+   <div class="bar"><button data-a="addf" data-id="${x.id}">+ Foto</button><button class="p" data-a="esave" data-id="${x.id}">Guardar</button><button data-a="ecancel">Cancelar</button></div></div>`;
+  return `<div class="ln${x.regie?" rg":""}"><div><span class="tag">${x.regie?"REGIE":"Normal"}</span>${x.otro?` <span class="tag">otra persona</span>`:""} ${parseFloat(x.h)?`<span class="hb">${fh(parseFloat(x.h))} h</span> `:""}${esc(x.txt)}${x.orig&&x.orig!==x.txt?`<div class="mute">Original: ${esc(x.orig)}</div>`:""}${x.mat?`<div class="mute">Material: ${esc(x.mat)}</div>`:""}<div class="ph">${ph}</div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="p" data-a="edit" data-id="${x.id}">Editar</button><button data-a="addf" data-id="${x.id}">+ Foto</button><button class="d" data-a="dell" data-id="${x.id}">Borrar</button></div></div>`}
+function obraV(o){
+  const dia=lastDate,hoy=today();
+  const dl=L(o).filter(x=>x.fecha===dia),dm=(o.material||[]).filter(m=>m.fecha===dia);
+  const sm=f=>dl.filter(f).reduce((a,x)=>a+(parseFloat(x.h)||0),0);
+  const dH=sm(x=>!x.otro),dR=sm(x=>x.regie&&!x.otro);
+  const prev=byDate(L(o).filter(x=>x.fecha!==dia)).reverse().map(([d,xs])=>`<div class="card"><b>${fdate(d)}</b> <span class="mute">(${fh(xs.filter(x=>!x.otro).reduce((a,x)=>a+(parseFloat(x.h)||0),0))} h)</span>${xs.map(lineH).join("")}</div>`).join("");
+  return `<div class="bar"><button class="p" data-a="rep">Ver informe completo (PDF)</button></div>
+  <h2 style="margin-top:4px">${esc(o.nombre)}</h2><div class="mute">${esc(o.cliente||"Sin cliente")} · ${esc(o.direccion)}</div>
+  <div class="card" style="border:2px solid var(--hi);margin-top:10px"><div class="mute">Para facturar en esta obra · ${fh(hrAll(o))} h (regie ${fh(hrR(o))} h incluida)</div><div class="tot" id="top1">${fm(money(o))} sin IVA (${rN(o)}/h)</div><div class="tot" id="top2">${fm(moneyC(o))} con IVA (${fr(rC(o))}/h)</div></div>
+  <div class="day">
+   <div class="dayh">INFORME DEL DÍA${dia===hoy?" · HOY":""}</div>
+   <div class="daysel"><button data-a="dprev" aria-label="Día anterior">‹</button><input id="df" type="date" value="${dia}"><button data-a="dnext" aria-label="Día siguiente">›</button>${dia!==hoy?'<button data-a="dhoy">Hoy</button>':''}</div>
+   <div class="tot" style="margin:8px 0">${fh(dH)} h${dR?` · de ellas REGIE ${fh(dR)} h`:""}</div>
+   <details class="pn"${(v.pv||[]).length?" open":""}><summary><b>📋 Pegar una nota con varias tareas</b></summary><textarea id="pn" placeholder="Pega aquí tu nota del día. Ej.: 2 horas pared baño, 1 hora fugas, 3 horas suelo"></textarea><div class="bar"><button class="p" data-a="pnota" id="pnb">Separar tareas</button></div><div id="pprev"></div></details>
+   <div class="bar"><button class="mk gr${v.rg?"":" on"}" data-a="mk" data-r="0">Normal</button><button class="mk rd${v.rg?" on":""}" data-a="mk" data-r="1">REGIE</button></div>
+   <textarea id="rd" placeholder="Qué has hecho (habla o escribe, sale en alemán)"></textarea>
+   <p class="mute" style="margin:0">Si no se escribe al dictar, toca el 🎤 del teclado del iPhone.</p><div class="bar"><button data-a="mic" data-t="rd">Dictar</button><select id="dl" style="width:auto">${LANGS.map(l=>`<option value="${l[0]}"${dlang===l[0]?" selected":""}>${l[1]}</option>`).join("")}</select></div>
+   <label for="rh">Horas de esta tarea</label><input id="rh" type="number" step="0.25" min="0" inputmode="decimal"><div class="chips">${[1,2,3,4,5,6,7,8].map(n=>`<button data-a="hset" data-v="${n}">${n}</button>`).join("")}<button data-a="hadd" data-v="-0.5">−½</button><button data-a="hadd" data-v="0.5">+½</button></div>
+   <label class="chk"><input id="ro" type="checkbox"> Lo hizo otra persona (no cuenta en mis horas)</label>
+   <div class="bar"><button data-a="cam">📷 Foto</button><button data-a="gal">Galería</button></div><input id="rc" type="file" accept="image/*" capture="environment" hidden><input id="rp" type="file" accept="image/*" multiple hidden>
+   <div class="ph" id="prev"></div>
+   <div class="bar"><button class="mk big ${v.rg?"rd":"gr"} on" data-a="addl" id="addl">＋ Añadir tarea${v.rg?" REGIE":""}</button></div>
+   ${dl.map(lineH).join("")||'<p class="mute">Aún no hay tareas en este día.</p>'}
+   <h3 class="dh3">Material de este día</h3>
+   <div class="g2"><div><input id="mn" placeholder="Ej. Weddyplatte 44 x 1,30"><div class="bar"><button data-a="mic" data-t="mn">Dictar</button></div></div><div><input id="mc" placeholder="Cantidad"></div></div>
+   <div class="bar"><button class="mk gr on" data-a="addm">＋ Añadir material</button></div>
+   ${dm.map(m=>`<div class="bar" style="align-items:center;justify-content:space-between"><span>${esc(m.n)}${m.c?": "+esc(m.c):""}</span><button class="d" data-a="delm" data-id="${m.id}">Borrar</button></div>`).join("")}
+  </div>
+  <input id="rl" type="file" accept="image/*" multiple hidden>
+  <details class="card"><summary><b>Días anteriores</b> (${fh(hrAll(o))} h en total, regie ${fh(hrR(o))} h${hrO(o)?", otras personas "+fh(hrO(o))+" h":""})</summary>${prev||'<p class="mute">Nada más por ahora.</p>'}</details>
+  <details class="card"><summary><b>Precio por hora</b> (cambiar)</summary>
+   <div class="g2"><div><label for="tn">CHF/h sin IVA</label><input id="tn" type="number" step="0.5" min="0" inputmode="decimal" value="${rN(o)}"></div><div><label>CHF/h con IVA (8,1 %)</label><div id="tcv" class="tot">${fr(rC(o))}</div></div></div><div id="mny" style="margin-top:10px">${mnyH(o)}</div></details>
+  <details class="card"><summary><b>Fotos del trabajo</b> (${(o.fotos||[]).length})</summary><div class="bar"><button class="p" data-a="addfo">Añadir fotos</button></div><input id="rj" type="file" accept="image/*" multiple hidden><div class="ph">${(o.fotos||[]).map(f=>`<img data-f="${f}" data-del="${f}" alt="Foto del trabajo">`).join("")}</div><p class="mute">Toca una foto para borrarla.</p></details>
+  <details class="card"><summary><b>Todo el material de la obra</b> (${(o.material||[]).length})</summary>${(o.material||[]).map(m=>`<div class="bar" style="align-items:center;justify-content:space-between"><span>${esc(m.n)}${m.c?": "+esc(m.c):""}${m.fecha?` <span class="mute">(${fd(m.fecha)})</span>`:""}</span><button class="d" data-a="delm" data-id="${m.id}">Borrar</button></div>`).join("")||'<p class="mute">Sin material.</p>'}</details>
+  <details class="card"><summary><b>Ajustes del trabajo</b></summary><label for="ocs">Cliente</label><select id="ocs">${clOpts(o.cliente)}</select><div class="bar"><button class="p" data-a="cerrar">${o.cerrada?"Reabrir obra":"Cerrar obra (terminada)"}</button><button class="d" data-a="delo">Borrar obra</button></div></details>`;
+}
+function keepEdit(x){if(v.edit===x.id&&$("#et")){x.txt=$("#et").value;x.h=$("#eh").value;x.regie=$("#er").checked;x.otro=$("#eo").checked}}
+const ME=()=>db.me||"";
+const f1=n=>Number.isInteger(n*2)?n.toFixed(1).replace(".",","):fh(n);
+function repDays(o){
+  const li=x=>`<li>${esc(x.txt)}${parseFloat(x.h)?` – ${f1(parseFloat(x.h))} Std.`:""}${x.regie?" (Regie)":""}${x.mat?", Material: "+esc(x.mat):""}</li>`;
+  return byDate(L(o)).map(([d,xs])=>{const me=xs.filter(x=>!x.otro),ot=xs.filter(x=>x.otro),s=f=>xs.filter(f).reduce((a,x)=>a+(parseFloat(x.h)||0),0),rh=s(x=>x.regie&&!x.otro);
+    return `<div class="card"><b>${esc(o.nombre)} – ${fd(d)}</b><ul>${me.map(li).join("")}</ul><div><b>Total: ${f1(s(x=>!x.otro))} Std.</b></div>${rh?`<div><b>Regie: ${f1(rh)} Std.</b></div>`:""}${ot.length?`<div class="mute2">Weitere Person (Regie, nicht im Total): ${f1(s(x=>x.otro))} Std.</div>`:""}<div class="ph">${xs.flatMap(x=>x.fotos||[]).map(f=>`<img data-f="${f}" alt="Foto">`).join("")}</div></div>`}).join("");
+}
+const totH=(all,r,o)=>`<div class="tot">Total: ${f1(all)} Std.</div><div class="tot">Regie: ${f1(r)} Std.</div><div class="mute2">Die Regie-Stunden sind im Total enthalten und werden separat verrechnet.</div>${o?`<div class="mute2">Weitere Personen (Regie, nicht im Total): ${f1(o)} Std.</div>`:""}`;
+function multiV(){
+  const os=(v.ids||[]).map(id=>db.obras.find(o=>o.id===id)).filter(Boolean);
+  const A=os.reduce((a,o)=>a+hrAll(o),0),R=os.reduce((a,o)=>a+hrR(o),0),O=os.reduce((a,o)=>a+hrO(o),0);
+  const blocks=os.map(o=>`<h2>${esc(o.nombre)}${o.direccion&&!o.nombre.includes(o.direccion)?", "+esc(o.direccion):""}</h2>${repDays(o)}<div class="card" style="border:2px solid var(--line)"><div><b>Total ${esc(o.nombre)}: ${f1(hrAll(o))} Std.</b></div><div><b>Regie: ${f1(hrR(o))} Std.</b></div></div>${(o.material||[]).length?`<div class="dh3">Material ${esc(o.nombre)}</div><ul>${o.material.map(m=>"<li>"+esc(m.n)+": "+esc(m.c)+"</li>").join("")}</ul>`:""}`).join("");
+  const cl=[...new Set(os.map(o=>o.cliente).filter(Boolean))].join(", ");
+  return `<div class="bar noprint"><button data-a="back">Menú</button><button class="p" data-a="print">Imprimir o guardar PDF</button></div>
+  <div class="rep"><h2>ARBEITSRAPPORT</h2>${ME()?`<div><b>${esc(ME())}</b></div>`:""}${cl?`<div>Kunde: ${esc(cl)}</div>`:""}<div>Baustellen: ${os.map(o=>esc(o.nombre)).join(", ")}</div>
+  ${blocks}<div class="card" style="border:2px solid var(--ink)"><div class="mute2">Alle Baustellen zusammen</div>${totH(A,R,O)}</div></div>
+  <div class="card noprint"><label for="to">Enviar a (correo)</label><input id="to" type="email" inputmode="email">
+  <p class="mute">Primero guarda el PDF con el botón de arriba; el correo se abre con el resumen y adjuntas el PDF tú.</p>
+  <div class="bar"><button class="p" data-a="mail">Preparar correo</button></div></div>`;
+}
+function repV(o){
+  const days=repDays(o);
+  const mat=(o.material||[]).length?`<h2>MATERIAL</h2><ul>${o.material.map(m=>"<li>"+esc(m.n)+": "+esc(m.c)+"</li>").join("")}</ul>`:"";
+  const fo=(o.fotos||[]).length?`<h2>FOTOS</h2><div class="ph">${o.fotos.map(f=>`<img data-f="${f}" alt="Foto">`).join("")}</div>`:"";
+  return `<div class="bar noprint"><button data-a="back">Menú</button><button data-a="obra">Volver a la obra</button><button class="p" data-a="print">Imprimir o guardar PDF</button></div>
+  <div class="rep"><h2>ARBEITSRAPPORT</h2>${ME()?`<div><b>${esc(ME())}</b></div>`:""}
+  <div>Baustelle: ${esc(o.nombre)}${o.direccion&&!o.nombre.includes(o.direccion)?", "+esc(o.direccion):""}</div>${days}
+  <div class="card" style="border:2px solid var(--ink)">${totH(hrAll(o),hrR(o),hrO(o))}</div>${mat}${fo}</div>
+  <div class="card noprint"><label for="to">Enviar a (correo)</label><input id="to" type="email" inputmode="email">
+  <p class="mute">Primero guarda el PDF con el botón de arriba; el correo se abre con el resumen y adjuntas el PDF tú.</p>
+  <div class="bar"><button class="p" data-a="mail">Preparar correo</button></div></div>`;
+}
+let H=[{n:"list",tab:"abiertas"}],hi=0;
+function snap(){return {n:v.n,id:v.id,tab:v.tab,ids:v.ids}}
+function navR(){const n=$("#nav");if(!n)return;const home=v.n==="list"&&(v.tab||"abiertas")==="abiertas";
+  if(home&&hi<=0&&hi>=H.length-1){n.style.display="none";return}
+  n.style.display="flex";n.innerHTML=`<button data-a="hback"${hi<=0?" disabled":""}>◀ Atrás</button><button data-a="home"${home?" disabled":""}>Menú</button><button data-a="hfwd"${hi>=H.length-1?" disabled":""}>Adelante ▶</button>`}
+function render(){
+  navR();
+  if(v.n!=="obra")pend=[];
+  const a=$("#app");
+  if(v.n==="list")a.innerHTML=listV();
+  else if(v.n==="multi")a.innerHTML=multiV();
+  else{const o=cur();if(!o){v={n:"list"};return render()}a.innerHTML=v.n==="obra"?obraV(o):repV(o)}
+  if(v.n==="obra"&&$("#pprev"))pvH();
+  a.querySelectorAll("img[data-f]").forEach(async i=>{i.src=(await get(i.dataset.f))||""});
+}
+async function toDE(t,lang){
+    try{
+    const s=await claude.use("sample");if(!s)return {de:t,ok:false};
+    const r=await s("Du bearbeitest eine Zeile eines Arbeitsrapports eines Plattenlegers (Baustelle, Schweiz). Der Text wurde diktiert, ist in einer beliebigen Sprache (meist Spanisch, Portugiesisch, Italienisch oder Deutsch) und enthält oft gemischte Wörter, z. B. spanische Sätze mit deutschen Fachwörtern. Schreibe die Zeile in korrektem, kurzem, sachlichem Schweizer Hochdeutsch (kein ß) mit den üblichen Plattenleger-Fachbegriffen. Beachte: spanisch fuga/juntas = Fuge/Fugen, impermeabilización = Abdichtung, azulejo/baldosa = Platte/Fliese, suelo = Boden, pared = Wand, ducha = Dusche, colocación = Verlegen, rodapié = Sockel. Deutsche Wörter im Text behalte bei, korrigiere sie nur falls falsch geschrieben. Gib NUR die fertige deutsche Zeile aus, ohne Erklärung.\n\nText: "+t,{modelTier:"quick",cache:false});
+    const x=(r.text||"").trim();return x?{de:x,ok:true}:{de:t,ok:false};
+  }catch(e){return {de:t,ok:false}}
+}
+document.addEventListener("change",async e=>{
+  if(e.target.id==="me"){db.me=e.target.value.trim();save();return}
+  if(e.target.dataset&&e.target.dataset.pv!==undefined){const x=v.pv[+e.target.dataset.pv];if(e.target.dataset.k==="h")x.h=parseFloat(e.target.value)||0;else x.regie=e.target.checked;pvH();return}
+  if(e.target.id==="dl"){dlang=e.target.value;return}
+  if(e.target.id==="tn"){const o=cur();o[e.target.id]=e.target.value;save();$("#mny").innerHTML=mnyH(o);$("#tcv").textContent=fr(rC(o));$("#top1").textContent=fm(money(o))+" sin IVA ("+rN(o)+"/h)";$("#top2").textContent=fm(moneyC(o))+" con IVA ("+fr(rC(o))+"/h)";return}
+  if(e.target.id==="ocs"){const o=cur();o.cliente=e.target.value;save();return}
+  if(e.target.id==="rj"){
+    const o=cur();if(!o)return;
+    for(const f of e.target.files){const id=uid();await put(id,await shrink(f));(o.fotos=o.fotos||[]).push(id)}
+    e.target.value="";save();render();return}
+  if(e.target.id==="rl"){
+    const o=cur(),x=o&&o.lineas.find(y=>y.id===v.tl);if(!x)return;
+    keepEdit(x);
+    for(const f of e.target.files){const id=uid();await put(id,await shrink(f));(x.fotos=x.fotos||[]).push(id)}
+    e.target.value="";save();render();return}
+  if(e.target.id==="df"){lastDate=e.target.value||today();render();return}
+  if(e.target.id!=="rp"&&e.target.id!=="rc")return;
+  for(const f of e.target.files)pend.push(await shrink(f));
+  e.target.value="";
+  $("#prev").innerHTML=pend.map(p=>`<img src="${p}" alt="Foto por guardar">`).join("");
+});
+document.addEventListener("click",async e=>{
+  const im=e.target.closest("img[data-del]");
+  if(im&&confirm("¿Borrar esta foto?")){const o=cur();await del(im.dataset.del);o.fotos=(o.fotos||[]).filter(f=>f!==im.dataset.del);save();render();return}
+  const il=e.target.closest("img[data-dl]");
+  if(il&&confirm("¿Borrar esta foto?")){const o=cur(),x=o.lineas.find(y=>y.id===il.dataset.id);if(x){keepEdit(x);await del(il.dataset.dl);x.fotos=(x.fotos||[]).filter(f=>f!==il.dataset.dl);save();render()}return}
+  const b=e.target.closest("[data-a]");if(!b)return;
+  const a=b.dataset.a,o=cur();
+  if(a==="hback"||a==="hfwd"||a==="home"){
+    if(a==="hback"&&hi>0)hi--;else if(a==="hfwd"&&hi<H.length-1)hi++;else if(a==="home"){v={n:"list",tab:"abiertas"};H=H.slice(0,hi+1);H.push(snap());hi=H.length-1;render();return}
+    v=Object.assign({},H[hi]);render();return}
+  if(a==="mic"){dictar(b.dataset.t,b);return}
+  else if(a==="hset"){$("#rh").value=b.dataset.v;return}
+  else if(a==="ehset"){$("#eh").value=b.dataset.v;return}
+  else if(a==="ehadd"){const el=$("#eh");el.value=Math.max(0,(parseFloat(el.value)||0)+parseFloat(b.dataset.v));return}
+  else if(a==="edit"){v.edit=b.dataset.id}
+  else if(a==="ecancel"){v.edit=null}
+  else if(a==="esave"){const x=o.lineas.find(y=>y.id===b.dataset.id);if(x){const t=$("#et").value.trim();if(!t){alert("El texto no puede estar vacío.");return}x.txt=t;x.h=$("#eh").value||0;x.regie=$("#er").checked;x.otro=$("#eo").checked;save()}v.edit=null}
+  else if(a==="etr"){const t=$("#et").value.trim();if(!t||busy)return;busy=true;b.textContent="Traduciendo...";const tr=await toDE(t,dlang);busy=false;$("#et").value=tr.de;b.textContent="Traducir al alemán";if(!tr.ok)alert("No se pudo traducir ahora.");return}
+  else if(a==="hadd"){const el=$("#rh");el.value=Math.max(0,(parseFloat(el.value)||0)+parseFloat(b.dataset.v));return}
+  else if(a==="cam"){$("#rc").click();return}
+  else if(a==="gal"){$("#rp").click();return}
+  else if(a==="open"){v={n:"obra",id:b.dataset.id};lastDate=today()}
+  else if(a==="dprev"){lastDate=addDays(lastDate,-1)}
+  else if(a==="dnext"){lastDate=addDays(lastDate,1)}
+  else if(a==="dhoy"){lastDate=today()}
+  else if(a==="mk"){v.rg=b.dataset.r==="1";const r=v.rg;document.querySelectorAll(".mk.gr[data-a=mk]").forEach(x=>x.classList.toggle("on",!r));document.querySelectorAll(".mk.rd[data-a=mk]").forEach(x=>x.classList.toggle("on",r));const ad=$("#addl");ad.className="mk big on "+(r?"rd":"gr");ad.textContent="＋ Añadir tarea"+(r?" REGIE":"");return}
+  else if(a==="opend"){v={n:"obra",id:b.dataset.id};lastDate=b.dataset.d}
+  else if(a==="openrep"){v={n:"rep",id:b.dataset.id}}
+  else if(a==="tab"){v.tab=b.dataset.t}
+  else if(a==="multi"){const ids=[...document.querySelectorAll(".mx:checked")].map(x=>x.value);if(ids.length<2){alert("Marca al menos dos obras.");return}v={n:"multi",ids,tab:"reportes"}}
+  else if(a==="cerrar"){o.cerrada=!o.cerrada;save();v={n:"list",tab:o.cerrada?"cerradas":"abiertas"}}
+  else if(a==="back"){v={n:"list",tab:v.tab}}
+  else if(a==="rep"){v.n="rep"}
+  else if(a==="obra"){v.n="obra"}
+  else if(a==="print"){window.print();return}
+  else if(a==="imp"){
+    const t=$("#it").value.trim();if(!t){alert("Pega primero tus notas.");return}
+    if(busy)return;busy=true;b.textContent="Ordenando...";
+    try{
+      const s=await claude.use("sample");if(!s)throw 0;
+      const r=await s.json("Ordne die folgenden Arbeitsnotizen eines Plattenlegers (Schweiz) in Arbeitsrapporte. Datumsformat der Notizen: T.M.JJ (Jahr 20JJ). Antworte NUR mit JSON dieser Form: {\"obras\":[{\"nombre\":\"Baustelle/Strasse\",\"cliente\":\"\",\"direccion\":\"PLZ Ort\",\"lineas\":[{\"fecha\":\"YYYY-MM-DD\",\"txt\":\"Tätigkeit auf Deutsch, kurz, mehrere Tätigkeiten des Tages mit Semikolon\",\"h\":0,\"regie\":false}],\"material\":[{\"n\":\"Material\",\"c\":\"Menge\"}]}]}. Regeln: Mehrere Baustellen trennen. Alles unter einer Überschrift REGIE oder mit Regie markiert ist regie:true, jede Regie-Tätigkeit eine eigene Zeile mit ihren Stunden (bei zwei Personen Stunden addieren). Die Tages-Gesamtstunden (z. B. '9 std') gelten für den Benutzer: Normalstunden = Gesamt minus Regie-Stunden des Benutzers, als eigene Zeile regie:false mit allen Normaltätigkeiten des Tages. Kein Stundenwert bekannt = 0. Spanische oder gemischte Wörter ins Deutsche übersetzen (fuga = Fuge). Material-Listen in material. Nichts erfinden.\n\nNotizen:\n"+t);
+      const n=(r&&r.obras)||[];if(!n.length)throw 0;
+      n.forEach(mergeObra);save();
+    }catch(e){alert("No se pudo ordenar ahora. Inténtalo otra vez o mándame las notas al chat.")}
+    busy=false}
+  else if(a==="addc"){
+    const n=$("#nc").value.trim();if(!n){alert("Escribe el nombre del cliente.");return}
+    if(!allCl().includes(n))db.clientes.push(n);save()}
+  else if(a==="addfo"){$("#rj").click();return}
+  else if(a==="addf"){v.tl=b.dataset.id;$("#rl").click();return}
+  else if(a==="addo"){
+    const n=$("#on").value.trim();if(!n){alert("Escribe el nombre de la obra.");return}
+    db.obras.push({id:uid(),nombre:n,cliente:$("#oc").value.trim(),direccion:$("#od").value.trim(),lineas:[],material:[]});save()}
+  else if(a==="addl"){
+    if(busy)return;
+    const t=$("#rd").value.trim(),h=$("#rh").value;
+    if(!t){alert("Escribe o dicta qué hiciste.");return}
+    if(!h){alert("Escribe las horas de esta tarea.");return}
+    busy=true;b.textContent="Traduciendo...";
+    const tr=await toDE(t,dlang);
+    const ids=[];for(const p of pend){const id=uid();await put(id,p);ids.push(id)}
+    o.lineas.push({id:uid(),fecha:$("#df").value,txt:tr.de,orig:t,lang:dlang,h:h,regie:!!v.rg,otro:$("#ro").checked,mat:"",fotos:ids});
+    pend=[];busy=false;save();
+    if(!tr.ok)alert("No se pudo traducir ahora. Se guardó el texto tal cual; puedes borrarlo y repetirlo.")}
+  else if(a==="pnota"){
+    const t=$("#pn").value.trim();if(!t){alert("Pega primero tu nota.");return}
+    if(busy)return;busy=true;b.textContent="Separando...";
+    try{
+      const s=await claude.use("sample");if(!s)throw 0;
+      const r=await s.json("Eine Notiz eines Plattenlegers (Schweiz) über einen Arbeitstag, in beliebiger Sprache oder gemischt (z. B. Spanisch mit deutschen Fachwörtern). Teile sie in einzelne Tätigkeiten. Pro Tätigkeit: 'de' = kurzer, sachlicher Satz in Schweizer Hochdeutsch (kein ß, Plattenleger-Fachbegriffe; fuga = Fuge, impermeabilización = Abdichtung), 'orig' = der Originaltext dieser Tätigkeit, 'h' = Stunden dieser Tätigkeit als Zahl (nur wenn in der Notiz genannt, sonst 0; 'una hora' = 1, 'media hora' = 0.5, 'dos horas' = 2), 'regie' = true nur wenn die Notiz es als Regie bezeichnet. Nichts erfinden, nichts weglassen. Antworte NUR mit JSON: {\"tareas\":[{\"de\":\"\",\"orig\":\"\",\"h\":0,\"regie\":false}]}\n\nNotiz:\n"+t);
+      v.pv=((r&&r.tareas)||[]).map(x=>({de:x.de,orig:x.orig,h:parseFloat(x.h)||0,regie:!!x.regie}));
+      if(!v.pv.length)throw 0;
+    }catch(e){alert("No se pudo separar ahora. Inténtalo otra vez.")}
+    busy=false}
+  else if(a==="pnadd"){
+    (v.pv||[]).forEach(x=>o.lineas.push({id:uid(),fecha:lastDate,txt:x.de,orig:x.orig,lang:"mix",h:x.h||0,regie:!!x.regie,otro:false,mat:"",fotos:[]}));
+    v.pv=[];save()}
+  else if(a==="addm"){
+    const n=$("#mn").value.trim();if(!n){alert("Escribe el material.");return}
+    (o.material=o.material||[]).push({id:uid(),n:n,c:$("#mc").value.trim(),fecha:lastDate});save()}
+  else if(a==="delm"){o.material=(o.material||[]).filter(x=>x.id!==b.dataset.id);save()}
+  else if(a==="dell"){
+    const x=o.lineas.find(y=>y.id===b.dataset.id);
+    for(const f of x.fotos||[])await del(f);o.lineas=o.lineas.filter(y=>y!==x);save()}
+  else if(a==="delo"){
+    if(!confirm("¿Borrar la obra entera con todo y fotos?"))return;
+    for(const x of o.lineas)for(const f of x.fotos||[])await del(f);
+    for(const f of o.fotos||[])await del(f);
+    db.obras=db.obras.filter(x=>x!==o);save();v={n:"list"}}
+  else if(a==="mail"&&v.n==="multi"){
+    const os=(v.ids||[]).map(id=>db.obras.find(x=>x.id===id)).filter(Boolean),A=os.reduce((s,x)=>s+hrAll(x),0),R=os.reduce((s,x)=>s+hrR(x),0);
+    const body="Guten Tag\n\nAnbei der Arbeitsrapport für "+os.map(x=>x.nombre).join(", ")+".\nTotal: "+fh(A)+" Std."+(R?"\nRegie: "+fh(R)+" Std. (im Total enthalten, separat zu verrechnen)":"")+"\n\nFreundliche Grüsse"+(ME()?"\n"+ME():"");
+    const subj="Arbeitsrapport: "+os.map(x=>x.nombre).join(", ");
+    try{if(navigator.share){await navigator.share({title:subj,text:body});return}}catch(e){if(e&&e.name==="AbortError")return}
+    try{await navigator.clipboard.writeText(subj+"\n\n"+body)}catch(e){}
+    toast("Texto copiado. Pégalo en tu correo y adjunta el PDF.");return}
+  else if(a==="mail"){
+    const body="Guten Tag\n\nAnbei der Arbeitsrapport für "+o.nombre+".\nTotal: "+fh(hrAll(o))+" Std."+(hrR(o)?"\nRegie: "+fh(hrR(o))+" Std. (im Total enthalten, separat zu verrechnen)":"")+"\n\nFreundliche Grüsse"+(ME()?"\n"+ME():"");
+    const subj="Arbeitsrapport: "+o.nombre,to=$("#to").value.trim();
+    try{if(navigator.share){await navigator.share({title:subj,text:body});return}}catch(e){if(e&&e.name==="AbortError")return}
+    const full=subj+"\n\n"+body;let ok=false;
+    try{await navigator.clipboard.writeText(full);ok=true}catch(e){try{const ta=document.createElement("textarea");ta.value=full;document.body.appendChild(ta);ta.select();ok=document.execCommand("copy");ta.remove()}catch(e2){}}
+    const l=document.createElement("a");l.href="mailto:"+encodeURIComponent(to)+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);l.target="_blank";document.body.appendChild(l);l.click();l.remove();
+    toast(ok?"Texto copiado. Si no se abre el correo, pégalo en tu correo y adjunta el PDF.":"Si no se abre el correo, copia el texto a mano.");return}
+  const s=snap();if(JSON.stringify(s)!==JSON.stringify(H[hi])){H=H.slice(0,hi+1);H.push(s);hi=H.length-1}
+  render();
+});
+const W={un:1,uno:1,una:1,um:1,uma:1,dos:2,duas:2,due:2,tres:3,três:3,tre:3,cuatro:4,quatro:4,quattro:4,cinco:5,cinque:5,seis:6,sei:6,siete:7,sete:7,sette:7,ocho:8,oito:8,otto:8,nueve:9,nove:9,diez:10,dez:10,dieci:10};
+function num(t){t=t.toLowerCase().replace(",",".");const m=t.match(/\d+(\.\d+)?/);let n=m?parseFloat(m[0]):0;if(!m)for(const w of t.split(/\s+/))if(W[w]){n=W[w];break}if(/media|y medio|e meia|e mezza/.test(t))n+=.5;return n||""}
+function pvH(){const t=v.pv||[];$("#pprev").innerHTML=t.map((x,i)=>`<div class="ln${x.regie?" rg":""}"><div style="flex:1"><div><b>${esc(x.de)}</b></div><div class="mute">${esc(x.orig)}</div><div class="g2"><div><label>Horas</label><input data-pv="${i}" data-k="h" type="number" step="0.25" min="0" inputmode="decimal" value="${x.h||""}"></div><label class="chk" style="margin-top:28px"><input type="checkbox" data-pv="${i}" data-k="regie"${x.regie?" checked":""}> REGIE</label></div></div></div>`).join("")+(t.length?`<div class="bar"><button class="mk big gr on" data-a="pnadd">＋ Añadir ${t.length} tareas al día</button></div>`:"")}
+let rec=null;
+function toast(m){let t=$("#toast");if(!t){t=document.createElement("div");t.id="toast";t.className="toast";document.body.appendChild(t)}t.textContent=m;t.style.display="block";clearTimeout(t._t);t._t=setTimeout(()=>t.style.display="none",9000)}
+function fallback(el){try{el.focus()}catch(e){}toast("Aquí el micrófono de la aplicación no funciona. Toca el 🎤 del teclado del iPhone (abajo a la derecha) y habla: se escribe en esta casilla.")}
+function dictar(id,btn){
+  const el=$("#"+id);
+  if(rec){try{rec.stop()}catch(e){}return}
+  const R=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!R){fallback(el);return}
+  const base=el.value,r=new R();rec=r;let got=false;
+  r.lang=dlang;r.continuous=true;r.interimResults=true;
+  btn.textContent="■ Parar";btn.classList.add("p");
+  r.onresult=e=>{
+    got=true;let fin="",tmp="";
+    for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t+" ";else tmp+=t}
+    const all=(fin+tmp).trim();
+    if(id==="rh")el.value=num(all);else el.value=(base?base+" ":"")+all;
+  };
+  r.onerror=e=>{if(e.error==="no-speech"){toast("No te he oído. Pulsa Dictar y habla otra vez.")}else if(e.error!=="aborted"){got=true;fallback(el)}};
+  r.onend=()=>{rec=null;btn.textContent="Dictar";btn.classList.remove("p");if(!got)fallback(el)};
+  try{r.start()}catch(e){rec=null;btn.textContent="Dictar";btn.classList.remove("p");fallback(el)}
+}
+openDb().then(render);
+</script>
+</body>
+</html>
+
+</body></html>
