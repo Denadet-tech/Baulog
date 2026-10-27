@@ -124,6 +124,7 @@ function listV(){
   <div class="bar"><button class="p" data-a="addo">Crear trabajo</button></div></div>
   <h2>Nuevo cliente</h2><div class="card"><label for="nc">Nombre del cliente (jefe o empresa)</label><input id="nc"><div class="bar"><button class="p" data-a="addc">Añadir cliente</button></div></div>
   </details><details class="more"><summary>Mi nombre (sale en el informe)</summary><label for="me">Nombre</label><input id="me" value="${esc(ME())}"></details><details class="more"><summary>Importar notas</summary><div class="card">
+  <div class="card"><b>Copia de mis datos</b><div class="mute">Para pasar tus obras de una versión de Baulog a otra. Las fotos no se pasan.</div><div class="bar"><button data-a="exp">Copiar mis datos</button></div><textarea id="bk" placeholder="Pega aquí los datos copiados de la otra versión"></textarea><div class="bar"><button class="p" data-a="impd">Importar datos</button></div><label for="bkf">O carga un archivo de copia</label><input id="bkf" type="file" accept=".json,application/json"></div>
   <label for="it">O pega aquí tus notas tal cual (se ordenan solas y salen en alemán)</label><textarea id="it" style="min-height:120px"></textarea>
   <div class="bar"><button class="p" data-a="imp">Ordenar e importar</button></div></div></details>`;
   }else if(tab==="reportes"){
@@ -189,6 +190,13 @@ function obraV(o){
 }
 function keepEdit(x){if(v.edit===x.id&&$("#et")){x.txt=$("#et").value;x.h=$("#eh").value;x.regie=$("#er").checked;x.otro=$("#eo").checked}}
 const ME=()=>db.me||"";
+function exportData(){return JSON.stringify({baulog:1,clientes:db.clientes||[],obras:db.obras.map(o=>({nombre:o.nombre,cliente:o.cliente||"",direccion:o.direccion||"",tn:o.tn,tc:o.tc,cerrada:!!o.cerrada,lineas:(o.lineas||[]).map(x=>({fecha:x.fecha,txt:x.txt,orig:x.orig||"",lang:x.lang||"",h:x.h,regie:!!x.regie,otro:!!x.otro,mat:x.mat||""})),material:(o.material||[]).map(m=>({n:m.n,c:m.c||"",fecha:m.fecha||""}))}))})}
+function importData(t){const d=JSON.parse(t);if(!d||!Array.isArray(d.obras))throw 0;let n=0;(d.clientes||[]).forEach(c=>{if(c&&!db.clientes.includes(c))db.clientes.push(c)});
+for(const so of d.obras){let o=db.obras.find(x=>x.nombre===so.nombre);if(!o){o={id:uid(),nombre:so.nombre,cliente:so.cliente||"",direccion:so.direccion||"",lineas:[],material:[]};db.obras.push(o)}
+if(so.cliente&&!o.cliente)o.cliente=so.cliente;if(so.direccion&&!o.direccion)o.direccion=so.direccion;if(so.tn!==undefined&&so.tn!==null)o.tn=so.tn;if(so.tc!==undefined&&so.tc!==null)o.tc=so.tc;if(so.cerrada)o.cerrada=true;
+(so.lineas||[]).forEach(l=>{if(!o.lineas.some(x=>x.fecha===l.fecha&&x.txt===l.txt&&!!x.regie===!!l.regie&&!!x.otro===!!l.otro)){o.lineas.push({id:uid(),fecha:l.fecha,txt:l.txt,orig:l.orig||"",lang:l.lang||"de-CH",h:l.h||0,regie:!!l.regie,otro:!!l.otro,mat:l.mat||"",fotos:[]});n++}});
+(so.material||[]).forEach(m=>{if(!o.material.some(x=>x.n===m.n&&x.c===m.c&&(x.fecha||"")===(m.fecha||"")))o.material.push({id:uid(),n:m.n,c:m.c||"",fecha:m.fecha||undefined})})}
+save();return n}
 const f1=n=>Number.isInteger(n*2)?n.toFixed(1).replace(".",","):fh(n);
 function repDays(o){
   const li=x=>`<li>${esc(x.txt)}${parseFloat(x.h)?` – ${f1(parseFloat(x.h))} Std.`:""}${x.regie?" (Regie)":""}${x.mat?", Material: "+esc(x.mat):""}</li>`;
@@ -243,6 +251,7 @@ async function toDE(t,lang){
   }catch(e){return {de:t,ok:false}}
 }
 document.addEventListener("change",async e=>{
+  if(e.target.id==="bkf"){const f=e.target.files[0];e.target.value="";if(!f)return;try{const n=importData(await f.text());toast("Importado: "+n+" tareas nuevas.");render()}catch(err){alert("Ese archivo no es válido.")}return}
   if(e.target.id==="me"){db.me=e.target.value.trim();save();return}
   if(e.target.dataset&&e.target.dataset.pv!==undefined){const x=v.pv[+e.target.dataset.pv];if(e.target.dataset.k==="h")x.h=parseFloat(e.target.value)||0;else x.regie=e.target.checked;pvH();return}
   if(e.target.id==="dl"){dlang=e.target.value;return}
@@ -298,6 +307,8 @@ document.addEventListener("click",async e=>{
   else if(a==="rep"){v.n="rep"}
   else if(a==="obra"){v.n="obra"}
   else if(a==="print"){window.print();return}
+  else if(a==="exp"){const t=exportData();const ta=$("#bk");if(ta){ta.value=t;ta.focus();ta.select()}let ok=false;try{await navigator.clipboard.writeText(t);ok=true}catch(e){try{ok=document.execCommand("copy")}catch(e2){}}toast(ok?"Datos copiados. Pégalos en la otra versión de Baulog.":"Selecciona el texto de la casilla, cópialo y pégalo en la otra versión.");return}
+  else if(a==="impd"){const t=$("#bk").value.trim();if(!t){alert("Pega primero los datos.");return}try{const n=importData(t);toast("Importado: "+n+" tareas nuevas.")}catch(e){alert("Esos datos no son válidos. Cópialos otra vez desde Baulog.");return}}
   else if(a==="imp"){
     const t=$("#it").value.trim();if(!t){alert("Pega primero tus notas.");return}
     if(busy)return;busy=true;b.textContent="Ordenando...";
